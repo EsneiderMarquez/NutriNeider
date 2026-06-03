@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.thymeleaf.org">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>NutriNeider - Nutricion para todos</title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" th:href="@{/assets/favicon.ico}" />
+        <!-- Font Awesome icons (free version)-->
+        <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+        <!-- Google fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+        <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link rel="stylesheet" th:href="@{/css/styles.css}">
+    </head>
+    <body id="page-top">
+        <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
+            <div class="container">
+                <a class="navbar-brand" href="#page-top">NutriNeider</a>
+                <button class="navbar-toggler text-uppercase font-weight-bold bg-primary text-white rounded" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    Menu
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="#page-top">Header</a></li>
+                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="#about">About</a></li>
+                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="#clients">Client</a></li>
+                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="#admins" onclick="toggleAdmin()">Admin</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- Masthead-->
+        <header class="masthead text-white text-center">
+            <div class="container d-flex align-items-center flex-column">
+                <!-- Masthead Avatar Image-->
+                <img class="masthead-avatar mb-5" th:src="@{/assets/img/avatar.png}" alt="..." />
+                <!-- Masthead Heading-->
+                <h1 class="masthead-heading text-uppercase mb-0">NutriNeider</h1>
+                <!-- Icon Divider-->
+                <div class="divider-custom divider-light">
+                    <div class="divider-custom-line"></div>
+                    <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                    <div class="divider-custom-line"></div>
+                </div>
+                <!-- Masthead Subheading-->
+                <p class="masthead-subheading font-weight-light mb-0">Consulta el valor nutricional de tus alimentos de forma rápida y sencilla</p>
+            </div>
+        </header>
+        <!-- About Section-->
+        <section class="page-section bg-primary text-white mb-0" id="about">
+            <div class="container">
+                <!-- About Section Heading-->
+                <h2 class="page-section-heading text-center text-uppercase text-white">Que somos</h2>
+                <!-- Icon Divider-->
+                <div class="divider-custom divider-light">
+                    <div class="divider-custom-line"></div>
+                    <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                    <div class="divider-custom-line"></div>
+                </div>
+                <!-- About Section Content-->
+                <div class="row justify-content-center">
+                    <div class="col-lg-6 col-md-8 col-sm-10">
+                        <p class="lead text-start">
+                            Es una página web diseñada para consultar de forma rápida y sencilla la información nutricional de diferentes alimentos.
+                            Su objetivo es ayudar al usuario a conocer datos importantes como calorías, proteínas, grasas, carbohidratos, vitaminas
+                            y otros nutrientes presentes en frutas, comidas o productos alimenticios.
+                            Esta herramienta permite tener una mejor idea del valor nutricional de los alimentos que consumimos diariamente,
+                            promoviendo hábitos más conscientes y saludables.
+                            NutriNeider está pensada como una página práctica, fácil de usar y útil para estudiantes, deportistas o cualquier persona
+                            interesada en mejorar su alimentación.
+                        </p>
+                    </div>
+                </div>
+                <!-- About Section Button-->
+            </div>
+        </section>
+        <!-- * * * * * * * * * * * * * * *-->
+        <!-- * * * * * * * * * * * * * * *-->
+        <!-- Client Section-->
+        <!-- * * * * * * * * * * * * * * *-->
+         <!-- * * * * * * * * * * * * * * *-->
+        <section class ="page-section" id="clients">
+            <div class="container">
+                <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Client</h2>
+                    <div class="divider-custom">
+                        <div class="divider-custom-line"></div>
+                        <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                        <div class="divider-custom-line"></div>     
+                    </div>               
+                <div class="text-center mb-4">
+                    <button class="btn btn-secondary" onclick="showClientTab('show')">Show products</button>
+                    <button class="btn btn-secondary" onclick="showClientTab('find')">Find by name</button>
+                    <button class="btn btn-secondary" onclick="showClientTab('buy')">Buy</button>
+                    <button class="btn btn-secondary" onclick="showClientTab('myPurchases')">My purchases</button>
+                </div>
+                <!-- Apartado de mostrar producto -->
+                <div id="clients-show" class="clients-tab" style="display: none;">
+                    <div class="row justify-content-center">
+                        <div class="table-responsive" th:if= "${not #lists.isEmpty(products)}">
+                            <table class="table table-striped" >
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Name</th>
+                                        <th>Price</th>
+                                        <th>Stock</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr th:each="p : ${products}">
+                                        <td th:text="${p.id}"></td>
+                                        <td th:text="${p.name}"></td>
+                                        <td th:text="${p.price}"></td>
+                                        <td th:text="${p.stock}"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div th:if= "${#lists.isEmpty(products)}" class="alert alert-info text-center">There are no products listed</div>
+                    </div>
+                </div>
+    
+                <!-- Apartado de buscar por nombre -->                 
+                <div id="clients-find" class="clients-tab" style="display: none;">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-8 col-xl-7">
+                            <form th:action= "@{/product/find}" method="get" class="mb-3">
+                                <div class="form-floating">
+                                    <input class="form-control" id="findName" name="findName" type="text" placeholder="Enter product name here..." required>
+                                    <label for="findName">Search for a product by name</label>
+                                </div>
+                                <button class="btn btn-primary mt-3" type="submit">Search</button>
+                            </form>
+                            <div th:if= "${not #lists.isEmpty(results)}">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Name</th>
+                                            <th>Price</th>
+                                            <th>Stock</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr th:each="p : ${results}">
+                                            <td th:text="${p.id}"></td>
+                                            <td th:text="${p.name}"></td>
+                                            <td th:text="${p.price}"></td>
+                                            <td th:text="${p.stock}"></td>
+                                            <td>
+                                                <a th:href="@{/product/details(id=${p.id})}" class="btn btn-sm btn-info">Nutritional information</a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div th:if= "${#lists.isEmpty(results) and param.findName!=null}"  class="alert alert-danger">Product not found with that name</div>
+                            <div th:if= "${productDetails !=null}" class="card mt-4">
+                                <div class="card-header">
+                                    <h4 th:text="${productDetails.name}"></h4>
+                                </div>
+                                <div class="card-body">
+                                    <p><strong>Proteinas:</strong><span th:text="${productDetails.proteins}"></span> g (per 100g)</p>
+                                    <p><strong>Carbohydrates:</strong><span th:text="${productDetails.carbohydrates}"></span> g (per 100g)</p>
+                                    <p><strong>Fats:</strong><span th:text="${productDetails.fats}"></span> g (per 100g)</p>
+                                    <p><strong>Calories:</strong><span th:text="${productDetails.calories}"></span>kcal (per unity)</p>
+                                    <p><strong>Description:</strong><span th:text="${productDetails.description}"></span></p>
+                                    <p><strong>Unity Type:</strong><span th:text="${productDetails.unityT}"></span>(<span th:text="${productDetails.gramsPer}"></span> g)</p>
+                                    <p><strong>Category:</strong><span th:text="${productDetails.category}"></span></p>
+                                </div>
+                            </div>
+                            <div th:if= "${productDetails==null and param.id != null}" class="alert alert-danger">Product not found</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Apartado de compra -->
+                <div id="clients-buy" class="clients-tab" style="display: none;">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-10">
+                            <form th:action= "@{/purchase/create}" method="post">
+                                <div class="form-floating mb-3">
+                                    <input class="form-control" id="clientName" name ="clientName" type="text" placeholder="Your name..." required />
+                                    <label for="clientName">Your name</label> 
+                                </div>
+                                <div class="form-floating mb-3">
+                                    <input class="form-control" id="clientEmail" name ="clientEmail" type="email" placeholder="Your email..." required />
+                                    <label for="clientEmail">Your email</label> 
+                                </div>
+                                <div class="table-responsive">
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>Product</th>
+                                                <th>Price</th>
+                                                <th>Stock</th>
+                                                <th>Quantity</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr th:each= "p, iterStat:${products}">
+                                                <td th:text="${p.name}"></td>
+                                                <td th:text="${p.price}"></td>
+                                                <td th:text="${p.stock}"></td>
+                                                <td>
+                                                    <input type="hidden" th:name="productIds" th:value="${p.id}"/>
+                                                    <input th:if= "${p.stock > 0}" type="number" th:name="quantities" min="0" value="0" style="width: 80px;"/> 
+                                                    <input th:if= "${p.stock == 0 }" type="hidden" th:name="quantities" value="0"/>
+                                                    <span th:if= "${p.stock == 0}" class="badge bg-secondary">Out of stock</span>  
+                                                </td>   
+                                            </tr>
+                                        </tbody> 
+                                    </table>                
+                                </div>
+                                
+                                <button class="btn btn-success btn-xl" type="submit">Confirm Purchase</button>
+                            </form>
+                            <div th:if= "${purchaseSuccess== 'true'}" class="alert alert-success mt-3">
+                                 Purchase confirmed Classification: <strong th:text="${purchaseLabel}"></strong>,
+                                 Discount: $<span th:text="${purchaseDiscount}"></span>
+                                 Total: $<span th:text="${purchaseTotal}"></span>
+                            </div>
+                            <div th:if= "${purchaseError!=null}" class="alert alert-danger mt-3">
+                                <span th:text="${purchaseError}"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Apartado de visualizar compras por correo -->
+                <div id="clients-myPurchases" class="clients-tab" style="display: none;">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-8 col-xl-7">
+                            <form th:action= "@{/purchase/my}" method="get">
+                                <div class="form-floating mb-3">
+                                    <input class="form-control" id="myEmail" name ="myEmail" type="email" placeholder="Your email..." th:value="${myEmail}" required />
+                                    <label for="myEmail">Your email</label> 
+                                </div>
+                                <button class="btn btn-primary btn-xl" type="submit">Search my purchases</button>
+                            </form>
+                        </div>
+                    </div>
+                    <div th:if= "${not #lists.isEmpty(myPurchases)}">
+                        <div class="row justify-content-center" th:each= "purchase:${myPurchases}">
+                            <div class="col-lg-10">
+                                <hr>
+                                <h5>Purchase #<span th:text="${purchase.id}"></span> - <span th:text="${#temporals.format(purchase.date, 'yyyy/MM/dd HH:mm')}"></span></h5>
+                                <p>Classification: <strong th:text="${purchase.label}"></strong></p>
+                                <div class="table-responsive">
+                                    <table class="table table-sm table bordered">
+                                        <thead class="table-light">
+                                            <tr>
+                                                <th>Product</th>
+                                                <th>Unit price</th>
+                                                <th>Quantity</th>
+                                                <th>Subtotal</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr th:each= "detail: ${purchase.details}">
+                                                <td th:text="${detail.product.name}"></td>
+                                                <td th:text="${detail.unitPrice}"></td>
+                                                <td th:text="${detail.quantity}"></td>
+                                                <td>$<span th:text="${detail.unitPrice * detail.quantity}"></span></td>
+                                            </tr>
+                                        </tbody> 
+                                    </table>                
+                                </div>
+                                <p class="text-end">
+                                    Gross: $ <span th:text="${purchase.grossTotal}"></span>
+                                    Discount: $ <span th:text="${purchase.discount}"></span>
+                                    <strong>Total: $ <span th:text="${purchase.netTotal}"></span></strong>
+                                </p>
+                            </div>
+                            <div class="row justify-content-center" th:if= "${myEmail != null and #lists.isEmpty(myPurchases)}">
+                                <div class="col-lg-8 col-xl-7">
+                                    <div class="alert alert-info text-center mt-3">No purchases found for this email</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- * * * * * * * * * * * * * * *-->
+        <!-- * * * * * * * * * * * * * * *-->
+        <!-- Admin Section-->
+        <!-- * * * * * * * * * * * * * * *-->
+        <!-- * * * * * * * * * * * * * * *-->
+        <section class ="page-section" id="admins" style="display:none;">
+            <div class="container">
+                <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Admin</h2>
+                    <div class="divider-custom">
+                        <div class="divider-custom-line"></div>
+                        <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                        <div class="divider-custom-line"></div>     
+                    </div>
+                <div class="admins-nav text-center mb-4">
+                    <button class="btn btn-secondary" onclick="showAdminTab('add')">Add Products</button>
+                    <button class="btn btn-secondary" onclick="showAdminTab('update')">Update Product</button>
+                    <button class="btn btn-secondary" onclick="showAdminTab('delete')">Deactivate/Reactive Product</button>
+                    <button class="btn btn-secondary" onclick="showAdminTab('show')">Show Products</button>
+                </div>
+                <!-- Apartado de creacion de producto --> 
+                <div id="admins-add" class="admin-tab" style="display: none;">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-8 col-xl-7">
+                            <form th:action="@{/product/insert}" method="post">
+
+                                    <!-- Name input-->
+                                <div class="form-floating mb-3">
+                                    <input class="form-control" id="name" name ="name" type="text" placeholder="Enter the product name..."  required />
+                                    <label for="name">Product Name</label>
+                                </div>
+
+                                    <!-- Proteinas input-->
+                                <div class="form-floating mb-3">
+                                    <input class="form-control" id="proteins" name ="proteins" type="number" placeholder="Enter the proteins here..." min="1" step="any" required />
+                                    <label for="proteins">Proteins in the product (per 100 grams)</label>
+                                </div>
+
+                                    <!-- Carbohidratos input-->
+                                <div class="form-floating mb-3">
+                                    <input class="form-control" id="carbohydrates" name ="carbohydrates" type="number" placeholder="Enter the carbohydrates here... " min="1" step="any" required />
+                                    <label for="carbohydrates">Carbohydrates in the product (per 100 grams)</label>
+                                </div>
+
+                                    <!--grasas input-->
+                                <div class="form-floating mb-3">
+                                <input class="form-control" id="fats" name ="fats" type="number" placeholder="Enter the fats here..." min="1" step="any" required />
+                                <label for="fats">Fats in the product (per 100 grams)</label>
+                                </div>
+
+                                    <!-- Descripcion input-->
+                                <div class="form-floating mb-3">
+                                    <input class="form-control" id="description"  name ="description" type="text" placeholder="Enter the description here..." min="1" style="height: 8rem" required>
+                                    <label for="description">Product description</label>
+                                </div>
+
+                                    <!-- Precio input-->
+                                <div class="form-floating mb-3">
+                                    <input class="form-control" id="price"  name ="price" type="number" step="any" placeholder="Enter the price here..." min="1" required>
+                                    <label for="price">Product Price ($)</label>
+                                </div>   
+
+                                    <!-- Stock input-->
+                                <div class="form-floating mb-3">
+                                <input class="form-control" id="stock" name ="stock" type="number" placeholder="Enter the stock here..." min="1" required />
+                                <label for="fats">Product stock (available quantity)</label>
+                                </div>
+
+                                    <!-- Gramos input-->
+                                <div class="form-floating mb-3">
+                                    <input class="form-control" id="gramsPer" name ="gramsPer" type="number" placeholder="Enter the grams per serving here..." min="1" step="any" required>
+                                    <label for="gramsPer">Grams per serving</label>
+                                </div>
+
+                                    <!-- Tipo input-->
+                                <div class="form-floating mb-3">
+                                    <input class="form-control" id="unityT"  name ="unityT" type="text" placeholder="Enter the unit type here..."  required>
+                                    <label for="unityT">Unit of sale (ej: unity, pack, bag...)</label>
+                                </div>
+
+                                    <!-- Categoria input-->
+                                <div class="form-floating mb-3">
+                                    <input class="form-control" id="category"  name ="category" type="text" placeholder="Enter the category here..."  required>
+                                    <label for="category">Product category (ej: dairy products, meat, fruit...)</label>
+                                </div>
+
+                                    <!-- MENSAJE DE LOGRO-->
+                                <div th:if="${success=='true'}" class="alert alert-success text-center mt-3">Product added successfully</div>
+                                <div th:if="${error=='true'}" class="alert alert-danger text-center mt-3">The product could not be added</div>
+                                <button class="btn btn-primary btn-xl" id="submitButton" type="submit">Add Product</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <!-- Apartado de actualizar productos compras -->
+                <div id="admins-update" class="admin-tab" style="display: none;">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-8 col-xl-7">
+                            <h3>Update Product</h3>
+                            <form th:action="@{/product/updateId}" method="get">
+                                <div class="form-floating mb-3">
+                                    <input class="form-control" id="updateIdP" name="updateIdP" type="number" placeholder="ID del producto..." required/>
+                                    <label for="updateIdP">Product ID to update</label>
+                                </div>
+                                <button class = "btn btn-primary btn-xl"type="submit">Find product</button>
+                            </form>
+                            <div th:if= "${param.updateIdP != null and updateProduct == null}" class="alert alert-danger"> Product not found</div>
+                        </div>
+                    </div>
+
+
+                    <div class="row justify-content-center" th:if="${updateProduct != null}">
+                        <div class="col-lg-8 col-xl-7"> 
+                            <hr class="my-4">
+                            <h4 class="text-center"> Editing: <span th:text="${updateProduct.name}"></span></h4> 
+                            <form th:action= "@{/product/update}" method="post">
+                                    <input type="hidden"  name="id"  th:value="${updateProduct.id}"/>
+                                <!-- Update Name input-->
+                                <div class="form-floating mb-3">
+                                    <input class="form-control" id="updName" name="updName" type="text" th:value="${updateProduct.name}" required />
+                                    <label for="updName">New Product Name</label>
+                                </div>
+                                <!-- Update Proteinas input-->
+                                <div class="form-floating mb-3">
+                                    <input class="form-control" id="updProteins" name="updProteins" type="number" min="0.01" th:value="${updateProduct.proteins}" step="any" required/>
+                                    <label for="updProteins">New Product Proteins </label>
+                                </div>
+                                <!--Update Carbohidratos input-->
+                                <div class="form-floating mb-3">
+                                    <input class="form-control" id="updCarbohydrates" name="updCarbohydrates" min="0.01" type="number" th:value="${updateProduct.carbohydrates}" step="any" required/>
+                                    <label for="updCarbohydrates">New Product Carbohydrates</label>
+                                </div>
+                                <!--Update grasas input-->
+                                <div class="form-floating mb-3">
+                                    <input class="form-control" id="updFats" name="updFats" type="number" min="0.01" th:value="${updateProduct.fats}" step="any" required/>
+                                    <label for="updFats">New Product Fats</label>
+                                </div>
+                                <!-- Update Descripcion input-->
+                                <div class="form-floating mb-3">
+                                    <textarea class="form-control" id="updDescripcion" name="updDescription" th:text="${updateProduct.description}" required></textarea>
+                                    <label for="updDescription">New Product Description</label>
+                                </div>
+                                <!-- Update Precio input-->
+                                <div class="form-floating mb-3">
+                                    <input class="form-control" id="updPrice" name="updPrice" type="number" step="any" min="1" th:value="${updateProduct.price}" required>
+                                    <label for="updPrice">New Price ($)</label>
+                                </div>
+
+                                <!-- Update Stock input-->
+                                <div class="form-floating mb-3">
+                                    <input class="form-control" id="updStock" name="updStock" type="number" min="1" th:value="${updateProduct.stock}" required>
+                                    <label for="updStock" >New Stock</label>
+                                </div>
+
+                                <!-- Update Gramos input-->
+                                <div class="form-floating mb-3">
+                                    <input class="form-control" id="updGramsPer" name="updGramsPer" type="number" step="any" min="0.01" th:value="${updateProduct.gramsPer}" required>
+                                    <label for="updGramsPer" >New Grams per serving</label>
+                                </div>
+
+                                <!-- Update Tipo input-->
+                                <div class="form-floating mb-3">
+                                    <input class="form-control" id="updUnityT" name="updUnityT" type="text" th:value="${updateProduct.unityT}" required>
+                                    <label for="updUnityT" >New Unit type</label>
+                                </div>
+
+                                <!-- Update Categoria input-->
+                                <div class="form-floating mb-3">
+                                    <input class="form-control" id="updCategory" name="updCategory" type="text" th:value="${updateProduct.category}" required>
+                                    <label for="updCategory" >New Category</label>
+                                </div>
+                                <button class="btn btn-success btn-xl" type="submit">Update product</button>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="col-lg-8 col-xl-7">
+                            <div th:if="${success=='true'}" class="alert alert-success text-center mt-3">Product updated successfully</div>
+                            <div th:if="${error=='true'}" class="alert alert-danger text-center mt-3">The product could not be updated</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Apartado de eliminar productos -->    
+                <div id="admins-delete" class="admin-tab" style="display: none;">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-8 col-xl-7">
+                            <h3>Deactivate product</h3>
+                            <p class="tex-muted"> This marks the product as inactive. It will not be removed from the database.</p>
+                            <form th:action= "@{/product/delete}" method="post">
+                                <div class="form-floating mb-3">
+                                    <input class="form-control" id="deleteId" name="deleteId" type="number" min="1" placeholder="Product id here..." required>
+                                    <label for="deleteId">Product ID to deactivate</label>
+                                </div>
+                                <button class="btn btn-danger btn-xl" type="submit">Deactivate</button>
+                            </form>
+                            <div th:if= "${deactiveSuccess=='true'}" class="alert alert-success mt-3">Product successfully deactivated</div>
+                            <div th:if= "${deactiveError=='true'}" class="alert alert-danger mt-3">Error: Product not found</div>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="col-lg-8 col-xl-7">
+                            <h3>Reactivate product</h3>
+                            <p class="tex-muted"> Restore previus deactivated product.</p>
+                            <form th:action= "@{/product/active}" method="post">
+                                <div class="form-floating mb-3">
+                                    <input class="form-control" id="activeId" name="activeId" type="number" min="1" placeholder="Product id here..." required>
+                                    <label for="activeId">Product ID to reactivate</label>
+                                </div>
+                                <button class="btn btn-success btn-xl" type="submit">Reactivate</button>
+                            </form>
+                            <div th:if= "${reactiveSuccess=='true'}" class="alert alert-success mt-3">Product successfully reactivated</div>
+                            <div th:if= "${reactiveError=='true'}" class="alert alert-danger mt-3">Error: Product not found</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Apartado de mostrar los productos --> 
+                <div id="admins-show" class="admin-tab" style="display: none;">
+                    <div class="row justify-content-center">
+                        <div class="table-responsive" th:if= "${not #lists.isEmpty(products)}">
+                            <table class="table table-striped" >
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Name</th>
+                                        <th>Protein</th>
+                                        <th>Carbohydrates</th>
+                                        <th>Fat</th>
+                                        <th>Calories</th>
+                                        <th>Description</th>
+                                        <th>Price</th>
+                                        <th>Stock</th>
+                                        <th>Grams/Portion</th>
+                                        <th>Unity Type</th>
+                                        <th>Category</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr th:each="p : ${products}">
+                                        <td th:text="${p.id}"></td>
+                                        <td th:text="${p.name}"></td>
+                                        <td th:text="${p.proteins}"></td>
+                                        <td th:text="${p.carbohydrates}"></td>
+                                        <td th:text="${p.fats}"></td>
+                                        <td th:text="${p.calories}"></td>
+                                        <td th:text="${p.description}"></td>
+                                        <td th:text="${p.price}"></td>
+                                        <td th:text="${p.stock}"></td>
+                                        <td th:text="${p.gramsPer}"></td>
+                                        <td th:text="${p.unityT}"></td>
+                                        <td th:text="${p.category}"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div th:if= "${#lists.isEmpty(products)}" class="alert alert-info text-center">There are no products listed</div>
+                    </div>
+                </div>
+
+    
+<!--SCRIPT PARA QUE AL DARLE A ADMIN SE MUESTRE Y BAJE AUTOMATICAMENTE-->
+        <script>
+            function toggleAdmin(){
+                var section = document.getElementById('admins');
+                if (section.style.display === "none" || section.style.display === "") {
+                    section.style.display = "block";
+
+                    setTimeout(function () {
+                        section.scrollIntoView({
+                            behavior: "smooth",
+                            block: "start" });}, 100);
+
+                } else {
+                    section.style.display = "none";
+                }
+            }
+        </script>
+<!--SCRIP PARA MANEJAR LAS VENTANAS EN EL MENU DE ADMIN-->
+        <script>
+            function showAdminTab(tabName){
+                var tabs=document.querySelectorAll('.admin-tab');
+                tabs.forEach(function(tab){
+                    tab.style.display='none';
+                });
+                document.getElementById('admins-'+tabName).style.display='block';
+            }
+        </script>
+<!--SCRIP PARA MANEJAR LAS VENTANAS EN EL MENU DE CLIENTES-->       
+        <script>
+            function showClientTab(tabName){
+                var tabs=document.querySelectorAll('.clients-tab');
+                tabs.forEach(function(tab){
+                    tab.style.display='none';
+                });
+                document.getElementById('clients-'+tabName).style.display='block';
+            }
+        </script>
+    </body>
+</html>

@@ -548,6 +548,44 @@
                         <div th:if= "${#lists.isEmpty(products)}" class="alert alert-info text-center">There are no products listed</div>
                     </div>
                 </div>
+            </div>
+        </section>
+
+        <section class="page-section" id="calendar">
+            <div class="container text-center mb-4" >
+                <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Calendario</h2>
+                <div class="divider-custom">
+                    <div class="divider-custom-line"></div>
+                    <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                    <div class="divider-custom-line"></div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-auto">
+                        <div class="calendar">
+                            <div class="calendar-header">
+                                <button id="prev">‹</button>
+                                <h2 id="month-year"></h2>
+                                <button id="next">›</button>
+                            </div>
+
+                            <div class="weekdays">
+                                <div>Dom</div>
+                                <div>Lun</div>
+                                <div>Mar</div>
+                                <div>Mié</div>
+                                <div>Jue</div>
+                                <div>Vie</div>
+                                <div>Sáb</div>
+                            </div>
+                            <div class="days" id="days"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+
 
     
 <!--SCRIPT PARA QUE AL DARLE A ADMIN SE MUESTRE Y BAJE AUTOMATICAMENTE-->
@@ -587,5 +625,6 @@
                 document.getElementById('clients-'+tabName).style.display='block';
             }
         </script>
+        <script th:src="@{/js/scripts.js}"></script>
     </body>
 </html>

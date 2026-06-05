@@ -11049,3 +11049,77 @@ html {
 .copyright {
   background-color: #1a252f;
 }
+
+
+.calendar {
+    width: 400px;
+    max-width: 100%;
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.calendar-header h2 {
+    margin: 0;
+    font-size: 22px;
+}
+
+.calendar-header button {
+    border: none;
+    background: var(--bs-primary);
+    color: white;
+    font-size: 24px;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.calendar-header button:hover {
+    background: #15967d;
+}
+
+.weekdays,
+.days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    text-align: center;
+}
+
+.weekdays {
+    margin-top: 20px;
+    font-weight: bold;
+    color: #555;
+}
+
+.weekdays div {
+    padding: 10px 0;
+}
+
+.days div {
+    padding: 10px;
+    margin: 3px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.days div:hover {
+    background: #e6f0ff;
+}
+
+.today {
+    background: var(--bs-primary);
+    color: white;
+    font-weight: bold;
+}
+
+.empty {
+    visibility: hidden;
+}

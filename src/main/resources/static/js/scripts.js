@@ -52,3 +52,62 @@ window.addEventListener('DOMContentLoaded', event => {
     });
 
 });
+
+const monthYear = document.getElementById("month-year");
+const daysContainer = document.getElementById("days");
+
+const prevButton = document.getElementById("prev");
+const nextButton = document.getElementById("next");
+
+let date = new Date();
+
+const months = [
+    "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
+    "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
+];
+
+function renderCalendar() {
+    const year = date.getFullYear();
+    const month = date.getMonth();
+
+    monthYear.textContent = `${months[month]} ${year}`;
+    daysContainer.innerHTML = "";
+
+    const firstDay = new Date(year, month, 1).getDay();
+    const lastDate = new Date(year, month + 1, 0).getDate();
+
+    for (let i = 0; i < firstDay; i++) {
+        const emptyDiv = document.createElement("div");
+        emptyDiv.classList.add("empty");
+        daysContainer.appendChild(emptyDiv);
+    }
+
+    for (let day = 1; day <= lastDate; day++) {
+        const dayDiv = document.createElement("div");
+        dayDiv.textContent = day;
+
+        const today = new Date();
+
+        if (
+            day === today.getDate() &&
+            month === today.getMonth() &&
+            year === today.getFullYear()
+        ) {
+            dayDiv.classList.add("today");
+        }
+
+        daysContainer.appendChild(dayDiv);
+    }
+}
+
+prevButton.addEventListener("click", () => {
+    date.setMonth(date.getMonth() - 1);
+    renderCalendar();
+});
+
+nextButton.addEventListener("click", () => {
+    date.setMonth(date.getMonth() + 1);
+    renderCalendar();
+});
+
+renderCalendar();

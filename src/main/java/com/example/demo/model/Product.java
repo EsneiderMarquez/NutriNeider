@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 
 
 @Entity
-@Table(name="Product")
+@Table(name="product")
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -39,8 +39,6 @@ public class Product {
     
    
     
-
-
 
     public Product( String name, double proteins, double carbohydrates, double fats, String description,
             double price, int stock, double gramsPer, String unityT, String category, Boolean active, LocalDateTime createTime) {

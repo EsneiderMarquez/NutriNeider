@@ -16,14 +16,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 
 
-
 @Controller
 
 public class ProductController {
     @Autowired
     private ProductRepository repository;
     
-
+    
     @PostMapping("/product/insert")
     public String insert(@RequestParam String name, @RequestParam Double proteins, @RequestParam Double carbohydrates
         , @RequestParam Double fats, @RequestParam String description, @RequestParam Double price, @RequestParam int stock

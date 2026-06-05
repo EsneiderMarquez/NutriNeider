@@ -372,8 +372,8 @@
                                 </div>
 
                                     <!-- MENSAJE DE LOGRO-->
-                                <div th:if="${success=='true'}" class="alert alert-success text-center mt-3">Product added successfully</div>
-                                <div th:if="${error=='true'}" class="alert alert-danger text-center mt-3">The product could not be added</div>
+                                <div th:if="${createSuccess=='true'}" class="alert alert-success text-center mt-3">Product added successfully</div>
+                                <div th:if="${createError=='true'}" class="alert alert-danger text-center mt-3">The product could not be added</div>
                                 <button class="btn btn-primary btn-xl" id="submitButton" type="submit">Add Product</button>
                             </form>
                         </div>
@@ -395,6 +395,7 @@
                                 <button class = "btn btn-primary btn-xl"type="submit">Find product</button>
                             </form>
                             <div th:if= "${param.updateIdP != null and updateProduct == null}" class="alert alert-danger"> Product not found</div>
+                            <div th:if= "${updateIdError}" class="alert alert-danger text-center mt-3" th:text="${updateIdError}"></div>
                         </div>
                     </div>
 
@@ -465,8 +466,8 @@
                     </div>
                     <div class="row justify-content-center">
                         <div class="col-lg-8 col-xl-7">
-                            <div th:if="${success=='true'}" class="alert alert-success text-center mt-3">Product updated successfully</div>
-                            <div th:if="${error=='true'}" class="alert alert-danger text-center mt-3">The product could not be updated</div>
+                            <div th:if="${updSuccess=='true'}" class="alert alert-success text-center mt-3">Product updated successfully</div>
+                            <div th:if="${updError=='true'}" class="alert alert-danger text-center mt-3">The product could not be updated</div>
                         </div>
                     </div>
                 </div>
@@ -552,34 +553,30 @@
         </section>
 
         <section class="page-section" id="calendar">
-            <div class="container text-center mb-4" >
+            <div class="container" >
                 <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Calendario</h2>
                 <div class="divider-custom">
                     <div class="divider-custom-line"></div>
                     <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
                     <div class="divider-custom-line"></div>
                 </div>
-                <div class="row justify-content-center">
-                    <div class="col-auto">
-                        <div class="calendar">
-                            <div class="calendar-header">
-                                <button id="prev">‹</button>
-                                <h2 id="month-year"></h2>
-                                <button id="next">›</button>
-                            </div>
-
-                            <div class="weekdays">
-                                <div>Dom</div>
-                                <div>Lun</div>
-                                <div>Mar</div>
-                                <div>Mié</div>
-                                <div>Jue</div>
-                                <div>Vie</div>
-                                <div>Sáb</div>
-                            </div>
-                            <div class="days" id="days"></div>
-                        </div>
+                <div class="calendar">
+                    <div class="calendar-header">
+                        <button id="prev">‹</button>
+                        <h2 id="month-year"></h2>
+                        <button id="next">›</button>
                     </div>
+
+                    <div class="weekdays">
+                        <div>Dom</div>
+                        <div>Lun</div>
+                        <div>Mar</div>
+                        <div>Mié</div>
+                        <div>Jue</div>
+                        <div>Vie</div>
+                        <div>Sáb</div>
+                    </div>
+                    <div class="days" id="days"></div>
                 </div>
             </div>
         </section>

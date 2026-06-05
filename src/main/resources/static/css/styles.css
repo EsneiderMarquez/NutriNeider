@@ -11054,6 +11054,7 @@ html {
 .calendar {
     width: 400px;
     max-width: 100%;
+    margin: 0 auto;
     background: white;
     border-radius: 12px;
     padding: 20px;

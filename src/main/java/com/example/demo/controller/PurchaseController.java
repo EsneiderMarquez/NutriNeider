@@ -25,7 +25,7 @@ public class PurchaseController {
     @Autowired private ProductRepository productRepository;
 
 
-
+    //metodo para get para mandar todos los productos y los clientes para poder buscarlos al ponerlos para hacer una compra
     @GetMapping("/purchase/buy")
     public String Buy(Model model) {
         model.addAttribute("products", productRepository.findByActiveTrue());
@@ -34,6 +34,7 @@ public class PurchaseController {
         return "index";
     }
 
+    //Metodo post para guardar las compras en la base de datos
     @PostMapping("/purchase/create")
     public String makePurchase(@RequestParam String clientName, @RequestParam String clientEmail,@RequestParam List<Integer> productIds, @RequestParam List<Integer> quantities, RedirectAttributes ra) {
 
